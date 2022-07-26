@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>🎮Play station </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <style>table{
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 85%;
+        /* margin-left: 20px; */
+        margin-left: 7.5%;
+        margin-top: 15px;
+        font-size: 120%;
+      }
+      tr,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      th{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        background-color: rgb(0, 103, 120);
+        color: white;
+        
+      }
+    
+    label{
+      /* margin-left: 20px; */
+      margin-left: 7.5%;
+    font-size: 150%;
+    }
+    h2{margin-left: 20px;}
+    h1{margin-left: 20px;}
+    button{
+      /* margin-left: 20px; */
+      margin-left: 7.5%;
+      font-size: 120%;
+    }
+    input{
+      margin: 5px;
+      font-size: 120%;
+    }
+    #price{width: 75px;}
+    
+    #final_price{
+      width: 85%;
+      margin-left: 20px;
+      margin-top: 15px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      background-color: gainsboro;
+      border-radius: 5px;
+      margin-left: 7.5%;
+    }
+    
+    .myButton {
+        box-shadow:inset 0px 1px 0px 0px #a4e271;
+        background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+        background-color:#89c403;
+        border-radius:6px;
+        border:1px solid #74b807;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:16px;
+        font-weight:bold;
+        padding:6px 24px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #528009;
+    }
+    .myButton:hover {
+        background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+        background-color:#77a809;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }</style>
+    <script>
+
+        function result(i){
+            var table = document.getElementById("table")
+            var row =[]
+            var cell1=[]
+            var cell2=[]
+            var cell3=[]
+            var cell4=[]
+            var cell5=[]
+            var cell6=[]
+        
+            row[i] = table.insertRow(-1);
+            cell1[i] = row[i].insertCell(0);
+            cell2[i] = row[i].insertCell(1);
+            cell3[i] = row[i].insertCell(2);
+            cell4[i] = row[i].insertCell(3);
+            cell5[i] = row[i].insertCell(4);
+            cell6[i] = row[i].insertCell(5);
+            
+            cell1[i].innerHTML = i;
+            cell2[i].innerHTML = start;
+            cell3[i].innerHTML = end;
+            cell4[i].innerHTML = interval.toFixed(2)+" min /"+(interval/60).toFixed(2)+" hr";
+            cell5[i].innerHTML = price_per_hour;
+            cell6[i].innerHTML = (p_min*interval).toFixed(2);
+        
+            // document.getElementById("show_price").innerHTML="price after approximation = "+Math.round(total_price/5)*5
+            document.getElementById("show_price").innerHTML="Total price = "+total_price.toFixed(2);
+            document.getElementById("show_price_2").innerHTML="price after approximation = "+Math.round(total_price/5)*5;
+        }
+        
+        
+        
+        
+        
+        i=1
+        total_price=0
+        price_list=[]
+        function time() {
+        
+            price_per_hour=document.getElementById("price").value
+            p_min=price_per_hour/60
+            start=document.getElementById("start").value
+            end=document.getElementById("end").value
+            console.log(start)
+            console.log(end)
+            sdate=new Date("01/01/2007 " + start)
+            edate=new Date("01/01/2007 " + end)
+            interval=(edate-sdate)/(60*1000)
+            total_price=total_price+p_min*interval
+            console.log(total_price)
+            console.log(Math.round(total_price/5)*5)
+            
+            result(i)
+            i=i+1
+            price_list.push(p_min*interval)
+            console.log(price_list)
+            
+        }
+        // function remove() {
+        
+            
+        // }</script>
+</head>
+<body>
+    <h1 style="text-align: center;">🎮PlayStation</h1>
+    <label>Price per hour</label>
+    <input type="number" id="price"><br>
+
+    <label>Start time</label>
+    <input type="time" id="start"><br>
+
+    <label>End time</label>
+    <input type="time" id="end"><br>
+
+    <button onclick="time()" class="myButton">calculate</button>
+
+
+    <div>
+        <table id="table">
+         <tr>
+             <th>No.</th>
+             <th>Start time</th>
+             <th>End time</th>
+             <th>Time in hour</th>
+             <th>Price per hour</th>
+             <th>Price</th>
+        </tr>
+        
+        </table> 
+     </div>
+     <div id="final_price">
+     <h2 id="show_price"></h2>
+     <h2 id="show_price_2"></h2>
+    </div>
+</body>
+</html>
